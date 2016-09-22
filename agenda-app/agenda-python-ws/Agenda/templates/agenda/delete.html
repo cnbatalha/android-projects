@@ -1,0 +1,17 @@
+{% extends 'Agenda/base.html' %}
+
+{% load bootstrap3 %}
+
+{% bootstrap_css %}
+
+{% bootstrap_javascript %}
+
+{% block content %}
+
+	<form method="post">
+		{% csrf_token %}
+		Deseja excluir "{{ object.name }}" ?
+		<input type="submit" value="Submit" />
+	</form>
+	
+{% endblock content %}	

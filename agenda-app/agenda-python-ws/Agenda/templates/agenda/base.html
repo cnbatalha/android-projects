@@ -1,0 +1,71 @@
+{% load bootstrap3 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<html>
+<head>
+        {% block title %}
+                <title>Título</title>
+        {% endblock title %}
+</head>
+<body>
+  <!--      <div class="navbar-header">
+                <tr>
+                        <th>Início</a></th>
+                        <th>Cadastro</a></th>
+                        <th>Lista</a></th>
+                </tr>
+        </div>
+
+         -->
+		
+	<!--nav class="navbar navbar-default" role="navigation">
+	  <div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<!--div class="navbar-header">
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="#">Início</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<!--div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		  <ul class="nav navbar-nav">
+			<li class="active"><a href="#">Link</a></li>
+			<li><a href="#">Link</a></li>
+		  </ul>
+			  
+		</div><!-- /.navbar-collapse -->
+	  <!--/div><!-- /.container-fluid -->
+	<!--/nav-->		
+	
+	<nav class="navbar navbar-default navbar-static-top" role="navigation">
+		<div class="container">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/agenda/">Início</a>
+			<a class="navbar-brand" href="/agenda/cadastro/">Cadastro</a>		  
+		</div>
+		<!--button type="button" href="/agenda/" class="btn btn-default navbar-btn">Home</button>		
+		<button type="button" href="/agenda/cadastro/" class="btn btn-default navbar-btn">Cadastro</button-->		
+	  </div>
+	</nav>
+	
+	<div class="panel panel-default">
+	  <div class="panel-body">	
+		{% block content %}
+
+		{% endblock content %}
+		</div>
+	</div>	
+</body>
+</html>

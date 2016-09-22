@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.carlos.agenda.ContatoActivity"-->
+
+    <item
+        android:id="@+id/action_save"
+        android:onClick="onClickSalvar"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/txt_salvar" />
+
+    <item
+        android:id="@+id/action_photo"
+        android:onClick="onClickFoto"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/txt_foto" />
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_settings" />
+
+</menu>
