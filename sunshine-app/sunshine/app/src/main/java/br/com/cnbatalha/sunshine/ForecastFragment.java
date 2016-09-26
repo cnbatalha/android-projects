@@ -46,6 +46,8 @@ public class ForecastFragment extends Fragment {
         int id = item.getItemId();
         if ( id == R.id.action_refresh)
         {
+            FetchWeatherTask fetchWeatherTask = new FetchWeatherTask();
+            fetchWeatherTask.execute("");
             return  true;
         }
 
@@ -68,9 +70,6 @@ public class ForecastFragment extends Fragment {
                 R.layout.list_item_forecast, R.id.list_item_forecast_textview, forecastList);
 
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-
-        FetchWeatherTask fetchWeatherTask = new FetchWeatherTask();
-        fetchWeatherTask.execute("");
 
         ListView lView = (ListView) view.findViewById(R.id.listview_forecast);
         lView.setAdapter(arrayAdapter);
