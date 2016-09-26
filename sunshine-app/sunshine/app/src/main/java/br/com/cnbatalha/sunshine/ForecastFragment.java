@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -26,14 +29,34 @@ public class ForecastFragment extends Fragment {
 
     public ForecastFragment() {
 
+        // enable menu options
+        setHasOptionsMenu(true);
+    }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        // create menu options
+        inflater.inflate(R.menu.forecastfragment, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if ( id == R.id.action_refresh)
+        {
+            return  true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        List<String> forecastList = new ArrayList<String>();
+        List<String> forecastList = new ArrayList<>();
         forecastList.add("Today - sunny - 40/30");
         forecastList.add("Tomorrow - sunny - 40/30");
         forecastList.add("Sunday - sunny - 40/30");
@@ -41,7 +64,7 @@ public class ForecastFragment extends Fragment {
         forecastList.add("Thursday - sunny - 40/30");
         forecastList.add("Wednesday - sunny - 40/30");
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(),
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(),
                 R.layout.list_item_forecast, R.id.list_item_forecast_textview, forecastList);
 
         View view = inflater.inflate(R.layout.fragment_main, container, false);
@@ -66,8 +89,6 @@ public class ForecastFragment extends Fragment {
             HttpURLConnection urlConnection = null;
 
             try {
-
-
                 // making url connection
                 String baseUrl = "http://api.openweathermap.org/data/2.5/forecast/daily?q=94043&mode=json&units=metric&cnt=7";
                 String apiKey = "&APPID=" + BuildConfig.OPEN_WEATHER_MAP_API_KEY;
