@@ -1,2 +1,0 @@
-# android-projects
-Android Projects
