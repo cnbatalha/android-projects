@@ -100,10 +100,10 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, RssNoticia> {
 	
 	@Override
 	protected void onPostExecute(RssNoticia result) {
-	
-		AdapterListView adp = new AdapterListView( NoticiasActivity.noticiaActivityContext, result.channel.items);
 
-		NoticiasActivity.lvNoticias.setAdapter(adp);
+		// Todo: Atualizar lista
+		//AdapterListView adp = new AdapterListView( NoticiasActivity.noticiaActivityContext, result.channel.items);
+		//NoticiasActivity.lvNoticias.setAdapter(adp);
 				
 		progressDlg.dismiss();
 		
