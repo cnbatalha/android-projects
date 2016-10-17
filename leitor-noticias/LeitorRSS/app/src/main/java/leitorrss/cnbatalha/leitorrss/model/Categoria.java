@@ -1,19 +1,27 @@
 package leitorrss.cnbatalha.leitorrss.model;
 
-public class Categoria {
+
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
+
+@Table(name = "categoria")
+public class Categoria extends Model {
 
 	public Categoria() {
+
 			}
 
 	public Categoria(String titulo, String url) {
 
-		super();
 		this.titulo = titulo;
 		this.url = url;
 	}
 
-	public String titulo;
 
+    @Column(name = "titulo")
+    public String titulo;
+    @Column(name = "url")
 	public String url;
 
 	public String getTitulo() {

@@ -2,6 +2,7 @@ package leitorrss.cnbatalha.leitorrss.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,9 +11,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.activeandroid.ActiveAndroid;
+import com.activeandroid.query.Select;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import leitorrss.cnbatalha.leitorrss.R;
+import leitorrss.cnbatalha.leitorrss.database.DataBaseHelper;
 import leitorrss.cnbatalha.leitorrss.database.RssLocalData;
 import leitorrss.cnbatalha.leitorrss.model.Categoria;
 
@@ -20,15 +26,27 @@ import leitorrss.cnbatalha.leitorrss.model.Categoria;
 public class MainActivity extends Activity {
 
     private RssLocalData rssLocalData;
+    private DataBaseHelper dataBaseHelper;
 
     public ArrayList<Categoria> Categories;
     public ListView lvCategorais;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // inicializando database
+        // dataBaseHelper = new DataBaseHelper(getApplicationContext());
+
+        ActiveAndroid.initialize(this);
+
+        Categoria categoria = new Categoria("Categoria 03", "url");
+        categoria.save();
+
+        System.out.print("salvado categoria");
+
+        setViewCategories();
     }
 
 
@@ -57,14 +75,15 @@ public class MainActivity extends Activity {
         rssLocalData = new RssLocalData();
 
         // Inicializando Categorias
-        Categories = rssLocalData.getCategories();
+        List<Categoria> lista = new Select().from(Categoria.class).execute();
+        // Categories = rssLocalData.getCategories();
 
         // link com componente no activate
         lvCategorais = (ListView) findViewById(R.id.lvCategories);
 
         // link com Adapter
         ArrayAdapter<Categoria> adapter = new ArrayAdapter<Categoria>(this,
-                android.R.layout.simple_list_item_1, Categories);
+                android.R.layout.simple_list_item_1, lista);
 
         if (lvCategorais != null) {
 

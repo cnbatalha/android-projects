@@ -55,6 +55,10 @@ public class RssLocalData {
                 "http://jogos.uol.com.br/ultnot/index.xml"));
         Categorias.add(new Categoria("Estilo",
                 "http://estilo.uol.com.br/ultnot/index.xml"));
+        Categorias.add(new Categoria("Categoria 12",
+                "http://estilo.uol.com.br/ultnot/index.xml"));
+        Categorias.add(new Categoria("Estilo",
+                "http://estilo.uol.com.br/ultnot/index.xml"));
     }
 
     /**

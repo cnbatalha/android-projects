@@ -19,7 +19,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
-		// db.execSQL(CREATE_CMD);
+		db.execSQL( RssDAO.CREATE_CMD);
+		db.beginTransaction();
+		// db.execSQL("insert into " + RssDAO.da);
 	
 	}
 
