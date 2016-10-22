@@ -41,12 +41,53 @@ public class MainActivity extends Activity {
 
         ActiveAndroid.initialize(this);
 
-        Categoria categoria = new Categoria("Categoria 03", "url");
-        categoria.save();
+        //Categoria categoria = new Categoria("Categoria 03", "url");
+        //categoria.save();
+        //addCategoriasDefult();
 
         System.out.print("salvado categoria");
 
         setViewCategories();
+    }
+
+
+    private void addCategoriasDefult()
+    {
+        Categoria categoria = null;
+
+        categoria = new Categoria("Esporte",
+                "http://tecnologia.uol.com.br/ultnot/index.xml");
+        categoria.save();
+        categoria = new Categoria("Economia",
+                "http://rss.uol.com.br/feed/economia.xml");
+        categoria.save();
+        categoria = new Categoria("Tecnologia",
+                "http://tecnologia.uol.com.br/ultnot/index.xml");
+        categoria.save();
+        categoria = new Categoria("Economia",
+                "http://rss.uol.com.br/feed/economia.xml");
+        categoria.save();
+        categoria = new Categoria("Cinema",
+                "http://cinema.uol.com.br/ultnot/index.xml");
+        categoria.save();
+        categoria = new Categoria("Esporte",
+                "http://esporte.uol.com.br/ultimas/index.xml");
+        categoria.save();
+        categoria = new Categoria("Futebol",
+                "http://esporte.uol.com.br/futebol/ultimas/index.xml");
+        categoria.save();
+        categoria = new Categoria("Jogos",
+                "http://jogos.uol.com.br/ultnot/index.xml");
+        categoria.save();
+        categoria = new Categoria("Estilo",
+                "http://estilo.uol.com.br/ultnot/index.xml");
+        categoria.save();
+        categoria = new Categoria("Categoria 12",
+                "http://estilo.uol.com.br/ultnot/index.xml");
+        categoria.save();
+        categoria = new Categoria("Estilo",
+                "http://estilo.uol.com.br/ultnot/index.xml");
+        categoria.save();
     }
 
 
