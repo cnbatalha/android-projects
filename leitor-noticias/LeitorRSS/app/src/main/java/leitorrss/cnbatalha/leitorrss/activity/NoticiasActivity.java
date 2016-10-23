@@ -8,8 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import leitorrss.cnbatalha.leitorrss.R;
-import leitorrss.cnbatalha.leitorrss.adapter.AdapterListView;
-import leitorrss.cnbatalha.leitorrss.model.Categoria;
 import leitorrss.cnbatalha.leitorrss.model.Consts;
 import leitorrss.cnbatalha.leitorrss.model.Item;
 import leitorrss.cnbatalha.leitorrss.model.RssNoticia;
@@ -18,12 +16,12 @@ import leitorrss.cnbatalha.leitorrss.server.HttpGetAsyncTask;
 
 public class NoticiasActivity extends Activity {
 
-    private RssNoticia rssNoticia;
+    RssNoticia rssNoticia;
 
-    private String urlNoticia;
-    private String noticiaTitle;
+    String urlNoticia;
+    String noticiaTitle;
 
-    private ListView lvNoticias;
+    ListView lvNoticias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,23 +36,17 @@ public class NoticiasActivity extends Activity {
         urlNoticia = extras.getString(Consts.URL_NOTICIA);
         noticiaTitle = extras.getString(Consts.CATEGORIA_NOTICIA);
 
-
-        Item item = new Item();
-        item.setTitle("Teste descricao");
-
         // criando objeto de noticias
         rssNoticia = new RssNoticia();
-        rssNoticia.channel.items.add(item);
+        rssNoticia.channel.setTitle(noticiaTitle);
 
-        // Todo: Atualizar lista
         // link com Adapter
         ArrayAdapter<Item> adapter = new ArrayAdapter<Item>(this,
                 android.R.layout.simple_list_item_1, rssNoticia.channel.getItems());
         this.lvNoticias.setAdapter(adapter);
 
-        rssNoticia.channel.items.add(item);
-
-        HttpGetAsyncTask httpGetAsyncTask = new HttpGetAsyncTask(rssNoticia);
+        // thread para carregar notícias
+        HttpGetAsyncTask httpGetAsyncTask = new HttpGetAsyncTask(adapter);
         httpGetAsyncTask.execute(urlNoticia);
 
     }

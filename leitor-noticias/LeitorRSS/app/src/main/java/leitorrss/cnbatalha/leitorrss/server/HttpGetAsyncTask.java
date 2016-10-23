@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 
 
 import com.thoughtworks.xstream.XStream;
@@ -26,9 +27,9 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, RssNoticia> {
 	
 	private ProgressDialog progressDlg;
 	private Context context;
-    private RssNoticia listNoticias;
+    private ArrayAdapter<Item> listNoticias;
 
-    public HttpGetAsyncTask(RssNoticia lista)
+    public HttpGetAsyncTask(ArrayAdapter<Item> lista)
     {
         super();
         this.listNoticias = lista;
@@ -68,6 +69,7 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, RssNoticia> {
 
 			httpUrlConnection = (HttpURLConnection) new URL(url)
 					.openConnection();
+            httpUrlConnection.setRequestProperty("Accept-Charset", "UTF-8");
 
 			InputStream in = new BufferedInputStream(
 					httpUrlConnection.getInputStream());
@@ -100,7 +102,7 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, RssNoticia> {
 				while (i.title.contains("\n"))
 					i.title = i.title.replace("\n", "");
 
-                this.listNoticias.channel.items.add(i);
+                // this.listNoticias.channel.items.add(i);
 			}
 
 		} catch (Exception ex) {
@@ -113,6 +115,11 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, RssNoticia> {
 	
 	@Override
 	protected void onPostExecute(RssNoticia result) {
+
+        for (Item i : result.channel.items) {
+            this.listNoticias.add(i);
+
+        }
 
 		// Todo: Atualizar lista
 		//AdapterListView adp = new AdapterListView( NoticiasActivity.noticiaActivityContext, result.channel.items);
