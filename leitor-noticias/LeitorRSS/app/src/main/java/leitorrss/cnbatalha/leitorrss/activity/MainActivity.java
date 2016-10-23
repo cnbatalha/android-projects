@@ -113,7 +113,7 @@ public class MainActivity extends Activity {
     private void setViewCategories() {
 
         // carregando Dados do APP
-        rssLocalData = new RssLocalData();
+        // rssLocalData = new RssLocalData();
 
         // Inicializando Categorias
         List<Categoria> lista = new Select().from(Categoria.class).execute();
@@ -141,11 +141,11 @@ public class MainActivity extends Activity {
                     Categoria ctg = (Categoria) lvCategorais
                             .getItemAtPosition(arg2);
 
-                    // Intent iNoticias = new Intent( LeitorRSS.this, NoticiasActivity.class );
+                    Intent iNoticias = new Intent( MainActivity.this, NoticiasActivity.class );
                     // iNoticias.putExtra(URL_NOTICIA, ctg.url);
                     // iNoticias.putExtra(CATEGORIA_NOTICIA, ctg.titulo);
 
-                    // startActivity(iNoticias);
+                    startActivity(iNoticias);
 
                 }
             });

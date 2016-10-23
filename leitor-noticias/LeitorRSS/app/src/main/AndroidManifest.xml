@@ -17,6 +17,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.NoticiasActivity"
+                    android:label="@string/title_activity_noticias">
+
+        </activity>
 
         <meta-data android:name="DATABASE" android:value="rss.db" />
         <meta-data android:name="VERSION" android:value="2" />
