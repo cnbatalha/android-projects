@@ -21,6 +21,7 @@ import leitorrss.cnbatalha.leitorrss.R;
 import leitorrss.cnbatalha.leitorrss.database.DataBaseHelper;
 import leitorrss.cnbatalha.leitorrss.database.RssLocalData;
 import leitorrss.cnbatalha.leitorrss.model.Categoria;
+import leitorrss.cnbatalha.leitorrss.model.Consts;
 
 
 public class MainActivity extends Activity {
@@ -142,11 +143,10 @@ public class MainActivity extends Activity {
                             .getItemAtPosition(arg2);
 
                     Intent iNoticias = new Intent( MainActivity.this, NoticiasActivity.class );
-                    // iNoticias.putExtra(URL_NOTICIA, ctg.url);
-                    // iNoticias.putExtra(CATEGORIA_NOTICIA, ctg.titulo);
+                    iNoticias.putExtra(Consts.URL_NOTICIA, ctg.url);
+                    iNoticias.putExtra(Consts.CATEGORIA_NOTICIA, ctg.titulo);
 
                     startActivity(iNoticias);
-
                 }
             });
         }

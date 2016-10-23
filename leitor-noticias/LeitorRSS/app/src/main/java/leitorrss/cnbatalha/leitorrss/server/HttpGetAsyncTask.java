@@ -26,6 +26,13 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, RssNoticia> {
 	
 	private ProgressDialog progressDlg;
 	private Context context;
+    private RssNoticia listNoticias;
+
+    public HttpGetAsyncTask(RssNoticia lista)
+    {
+        super();
+        this.listNoticias = lista;
+    }
 
 	@Override
 	protected void onPreExecute() {
@@ -39,8 +46,13 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, RssNoticia> {
 		}	
 			
 		super.onPreExecute();
-	}	
-	
+	}
+
+	@Override
+	protected void onProgressUpdate(Integer... values) {
+
+	}
+
 	@Override
 	protected RssNoticia doInBackground(String... urls) {
 	
@@ -87,8 +99,9 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, RssNoticia> {
 
 				while (i.title.contains("\n"))
 					i.title = i.title.replace("\n", "");
-			}
 
+                this.listNoticias.channel.items.add(i);
+			}
 
 		} catch (Exception ex) {
 			System.out.print("Serialization Read Error : " + ex.getMessage());
@@ -104,8 +117,10 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, RssNoticia> {
 		// Todo: Atualizar lista
 		//AdapterListView adp = new AdapterListView( NoticiasActivity.noticiaActivityContext, result.channel.items);
 		//NoticiasActivity.lvNoticias.setAdapter(adp);
+
+        // this.listNoticias = result;
 				
-		progressDlg.dismiss();
+		// progressDlg.dismiss();
 		
 		super.onPostExecute(result);
 	}

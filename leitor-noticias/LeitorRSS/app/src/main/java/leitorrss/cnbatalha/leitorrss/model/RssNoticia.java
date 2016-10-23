@@ -25,7 +25,12 @@ public class RssNoticia {
 	public void setchannels(Channel channel) {
 		this.channel = channel;
 	}
-	
+
 	@XStreamAlias("channel")
 	public Channel channel;
+
+	public RssNoticia()
+	{
+		this.channel = new Channel();
+	}
 }
