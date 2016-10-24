@@ -70,7 +70,11 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, RssNoticia> {
 
 			httpUrlConnection = (HttpURLConnection) new URL(url)
 					.openConnection();
-            httpUrlConnection.setRequestProperty("Accept-Charset", "gzip, deflate, sdch");
+            //httpUrlConnection.setRequestProperty("Accept-Charset", "gzip, deflate, sdch");
+            httpUrlConnection.setRequestProperty("User-Agent", "SO");
+            httpUrlConnection.setRequestProperty("cache-control", "no-cache");
+            httpUrlConnection.setRequestProperty("postman-token", "462fc2cf-39dd-15c0-de52-f9d462a67237");
+
 
             //BufferedReader reader = new BufferedReader(
             //       new InputStreamReader(httpUrlConnection.getInputStream(), "UTF-8"));

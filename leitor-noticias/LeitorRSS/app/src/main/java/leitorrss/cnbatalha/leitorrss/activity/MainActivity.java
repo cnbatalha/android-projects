@@ -42,9 +42,15 @@ public class MainActivity extends Activity {
 
         ActiveAndroid.initialize(this);
 
-        //Categoria categoria = new Categoria("Categoria 03", "url");
-        //categoria.save();
-        //addCategoriasDefult();
+        // atualizando categorias
+        List<Categoria> lista = new Select().from(Categoria.class).execute();
+        for (Categoria categoria : lista )
+        {
+            categoria.delete();
+        }
+
+        // adicionando categorias
+        addCategoriasDefult();
 
         System.out.print("salvado categoria");
 
@@ -56,11 +62,11 @@ public class MainActivity extends Activity {
     {
         Categoria categoria = null;
 
-        categoria = new Categoria("Esporte",
-                "http://tecnologia.uol.com.br/ultnot/index.xml");
+        categoria = new Categoria("Noticias",
+                "http://rss.uol.com.br/feed/noticias.xml");
         categoria.save();
-        categoria = new Categoria("Economia",
-                "http://rss.uol.com.br/feed/economia.xml");
+        categoria = new Categoria("Brasil",
+                "http://rss.uol.com.br/feed/noticias.xml");
         categoria.save();
         categoria = new Categoria("Tecnologia",
                 "http://tecnologia.uol.com.br/ultnot/index.xml");
@@ -74,20 +80,8 @@ public class MainActivity extends Activity {
         categoria = new Categoria("Esporte",
                 "http://esporte.uol.com.br/ultimas/index.xml");
         categoria.save();
-        categoria = new Categoria("Futebol",
-                "http://esporte.uol.com.br/futebol/ultimas/index.xml");
-        categoria.save();
-        categoria = new Categoria("Jogos",
+                categoria = new Categoria("Jogos",
                 "http://jogos.uol.com.br/ultnot/index.xml");
-        categoria.save();
-        categoria = new Categoria("Estilo",
-                "http://estilo.uol.com.br/ultnot/index.xml");
-        categoria.save();
-        categoria = new Categoria("Categoria 12",
-                "http://estilo.uol.com.br/ultnot/index.xml");
-        categoria.save();
-        categoria = new Categoria("Estilo",
-                "http://estilo.uol.com.br/ultnot/index.xml");
         categoria.save();
     }
 
