@@ -21,6 +21,7 @@ import leitorrss.cnbatalha.leitorrss.R;
 import leitorrss.cnbatalha.leitorrss.database.DataBaseHelper;
 import leitorrss.cnbatalha.leitorrss.database.RssLocalData;
 import leitorrss.cnbatalha.leitorrss.model.Categoria;
+import leitorrss.cnbatalha.leitorrss.model.Consts;
 
 
 public class MainActivity extends Activity {
@@ -41,12 +42,53 @@ public class MainActivity extends Activity {
 
         ActiveAndroid.initialize(this);
 
-        Categoria categoria = new Categoria("Categoria 03", "url");
-        categoria.save();
+        //Categoria categoria = new Categoria("Categoria 03", "url");
+        //categoria.save();
+        //addCategoriasDefult();
 
         System.out.print("salvado categoria");
 
         setViewCategories();
+    }
+
+
+    private void addCategoriasDefult()
+    {
+        Categoria categoria = null;
+
+        categoria = new Categoria("Esporte",
+                "http://tecnologia.uol.com.br/ultnot/index.xml");
+        categoria.save();
+        categoria = new Categoria("Economia",
+                "http://rss.uol.com.br/feed/economia.xml");
+        categoria.save();
+        categoria = new Categoria("Tecnologia",
+                "http://tecnologia.uol.com.br/ultnot/index.xml");
+        categoria.save();
+        categoria = new Categoria("Economia",
+                "http://rss.uol.com.br/feed/economia.xml");
+        categoria.save();
+        categoria = new Categoria("Cinema",
+                "http://cinema.uol.com.br/ultnot/index.xml");
+        categoria.save();
+        categoria = new Categoria("Esporte",
+                "http://esporte.uol.com.br/ultimas/index.xml");
+        categoria.save();
+        categoria = new Categoria("Futebol",
+                "http://esporte.uol.com.br/futebol/ultimas/index.xml");
+        categoria.save();
+        categoria = new Categoria("Jogos",
+                "http://jogos.uol.com.br/ultnot/index.xml");
+        categoria.save();
+        categoria = new Categoria("Estilo",
+                "http://estilo.uol.com.br/ultnot/index.xml");
+        categoria.save();
+        categoria = new Categoria("Categoria 12",
+                "http://estilo.uol.com.br/ultnot/index.xml");
+        categoria.save();
+        categoria = new Categoria("Estilo",
+                "http://estilo.uol.com.br/ultnot/index.xml");
+        categoria.save();
     }
 
 
@@ -72,7 +114,7 @@ public class MainActivity extends Activity {
     private void setViewCategories() {
 
         // carregando Dados do APP
-        rssLocalData = new RssLocalData();
+        // rssLocalData = new RssLocalData();
 
         // Inicializando Categorias
         List<Categoria> lista = new Select().from(Categoria.class).execute();
@@ -100,12 +142,11 @@ public class MainActivity extends Activity {
                     Categoria ctg = (Categoria) lvCategorais
                             .getItemAtPosition(arg2);
 
-                    // Intent iNoticias = new Intent( LeitorRSS.this, NoticiasActivity.class );
-                    // iNoticias.putExtra(URL_NOTICIA, ctg.url);
-                    // iNoticias.putExtra(CATEGORIA_NOTICIA, ctg.titulo);
+                    Intent iNoticias = new Intent( MainActivity.this, NoticiasActivity.class );
+                    iNoticias.putExtra(Consts.URL_NOTICIA, ctg.url);
+                    iNoticias.putExtra(Consts.CATEGORIA_NOTICIA, ctg.titulo);
 
-                    // startActivity(iNoticias);
-
+                    startActivity(iNoticias);
                 }
             });
         }

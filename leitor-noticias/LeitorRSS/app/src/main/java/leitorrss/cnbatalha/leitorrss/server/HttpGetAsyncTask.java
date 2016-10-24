@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 
 
 import com.thoughtworks.xstream.XStream;
@@ -16,6 +17,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.CharsetEncoder;
 
 import leitorrss.cnbatalha.leitorrss.adapter.AdapterListView;
 import leitorrss.cnbatalha.leitorrss.model.Item;
@@ -26,6 +28,13 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, RssNoticia> {
 	
 	private ProgressDialog progressDlg;
 	private Context context;
+    private ArrayAdapter<Item> listNoticias;
+
+    public HttpGetAsyncTask(ArrayAdapter<Item> lista)
+    {
+        super();
+        this.listNoticias = lista;
+    }
 
 	@Override
 	protected void onPreExecute() {
@@ -39,8 +48,13 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, RssNoticia> {
 		}	
 			
 		super.onPreExecute();
-	}	
-	
+	}
+
+	@Override
+	protected void onProgressUpdate(Integer... values) {
+
+	}
+
 	@Override
 	protected RssNoticia doInBackground(String... urls) {
 	
@@ -56,6 +70,10 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, RssNoticia> {
 
 			httpUrlConnection = (HttpURLConnection) new URL(url)
 					.openConnection();
+            httpUrlConnection.setRequestProperty("Accept-Charset", "gzip, deflate, sdch");
+
+            //BufferedReader reader = new BufferedReader(
+            //       new InputStreamReader(httpUrlConnection.getInputStream(), "UTF-8"));
 
 			InputStream in = new BufferedInputStream(
 					httpUrlConnection.getInputStream());
@@ -87,8 +105,9 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, RssNoticia> {
 
 				while (i.title.contains("\n"))
 					i.title = i.title.replace("\n", "");
-			}
 
+                // this.listNoticias.channel.items.add(i);
+			}
 
 		} catch (Exception ex) {
 			System.out.print("Serialization Read Error : " + ex.getMessage());
@@ -101,11 +120,18 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, RssNoticia> {
 	@Override
 	protected void onPostExecute(RssNoticia result) {
 
+        for (Item i : result.channel.items) {
+            this.listNoticias.add(i);
+
+        }
+
 		// Todo: Atualizar lista
 		//AdapterListView adp = new AdapterListView( NoticiasActivity.noticiaActivityContext, result.channel.items);
 		//NoticiasActivity.lvNoticias.setAdapter(adp);
+
+        // this.listNoticias = result;
 				
-		progressDlg.dismiss();
+		// progressDlg.dismiss();
 		
 		super.onPostExecute(result);
 	}
@@ -114,7 +140,7 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, RssNoticia> {
 		BufferedReader reader = null;
 		StringBuffer data = new StringBuffer("");
 		try {
-			reader = new BufferedReader(new InputStreamReader(in));
+			reader = new BufferedReader(new InputStreamReader(in, "Cp1252"));
 			String line = "";
 			while ((line = reader.readLine()) != null) {
 				data.append(line);

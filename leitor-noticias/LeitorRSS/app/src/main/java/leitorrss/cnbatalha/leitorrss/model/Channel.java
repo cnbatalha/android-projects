@@ -4,6 +4,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @XStreamAlias("channel")
@@ -83,4 +84,13 @@ public class Channel {
 		this.items = items;
 	}
 
+	public Channel()
+	{
+		this.items = new ArrayList<Item>();
+	}
+
+	@Override
+	public String toString() {
+		return this.description;
+	}
 }
