@@ -17,6 +17,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.CharsetEncoder;
 
 import leitorrss.cnbatalha.leitorrss.adapter.AdapterListView;
 import leitorrss.cnbatalha.leitorrss.model.Item;
@@ -69,7 +70,10 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, RssNoticia> {
 
 			httpUrlConnection = (HttpURLConnection) new URL(url)
 					.openConnection();
-            httpUrlConnection.setRequestProperty("Accept-Charset", "UTF-8");
+            httpUrlConnection.setRequestProperty("Accept-Charset", "gzip, deflate, sdch");
+
+            //BufferedReader reader = new BufferedReader(
+            //       new InputStreamReader(httpUrlConnection.getInputStream(), "UTF-8"));
 
 			InputStream in = new BufferedInputStream(
 					httpUrlConnection.getInputStream());
@@ -136,7 +140,7 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, RssNoticia> {
 		BufferedReader reader = null;
 		StringBuffer data = new StringBuffer("");
 		try {
-			reader = new BufferedReader(new InputStreamReader(in));
+			reader = new BufferedReader(new InputStreamReader(in, "Cp1252"));
 			String line = "";
 			while ((line = reader.readLine()) != null) {
 				data.append(line);

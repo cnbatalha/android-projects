@@ -1,13 +1,17 @@
 package leitorrss.cnbatalha.leitorrss.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import leitorrss.cnbatalha.leitorrss.R;
+import leitorrss.cnbatalha.leitorrss.model.Categoria;
 import leitorrss.cnbatalha.leitorrss.model.Consts;
 import leitorrss.cnbatalha.leitorrss.model.Item;
 import leitorrss.cnbatalha.leitorrss.model.RssNoticia;
@@ -44,6 +48,25 @@ public class NoticiasActivity extends Activity {
         ArrayAdapter<Item> adapter = new ArrayAdapter<Item>(this,
                 android.R.layout.simple_list_item_1, rssNoticia.channel.getItems());
         this.lvNoticias.setAdapter(adapter);
+
+
+        // Comando click da Categoria selecionada
+        this.lvNoticias.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1,
+                                    int arg2, long arg3) {
+
+                Item ctg = (Item) rssNoticia.channel.items.get(arg2);
+                //        .getItemAtPosition(arg2);
+
+                Intent iNoticias = new Intent( NoticiasActivity.this, NoticiaActivity.class );
+                iNoticias.putExtra(Consts.TITULO, ctg.getTitle()  );
+                iNoticias.putExtra(Consts.CONTENT, ctg.getDescription());
+
+                startActivity(iNoticias);
+            }
+        });
 
         // thread para carregar notícias
         HttpGetAsyncTask httpGetAsyncTask = new HttpGetAsyncTask(adapter);
