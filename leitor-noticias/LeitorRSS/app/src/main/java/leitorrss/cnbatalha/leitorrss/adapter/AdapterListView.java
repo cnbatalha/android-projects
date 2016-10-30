@@ -17,6 +17,7 @@ public class AdapterListView extends BaseAdapter {
 
 	private List<Item> Items;
 	private LayoutInflater mInflater;
+	private ListViewItem listViewItem;
 
 	public AdapterListView(Context context, List<Item> items) {
 		super();
@@ -51,12 +52,13 @@ public class AdapterListView extends BaseAdapter {
 		// se a view estiver nula (nunca criada), inflamos o layout nela.
 		if (convertView == null) {
 			// infla o layout para podermos pegar as views
-			//convertView = mInflater.inflate(R.layout.item_listview, null);
+			convertView = mInflater.inflate(R.layout.list_news, null);
 			// cria um item de suporte para n�o precisarmos sempre
 			// inflar as mesmas informacoes
-			// itemHolder = new ItemSuporte();
-			// itemHolder.txtTitle = ((TextView) view.findViewById(R.id.text));
-			// itemHolder.imgIcon = ((ImageView)
+			listViewItem = new ListViewItem();
+			listViewItem.setTvDescricao( ((TextView) convertView.findViewById(R.id.tvDescricao)) );
+			listViewItem.setTvData( ((TextView) convertView.findViewById(R.id.tvData)) );
+			// listViewItem.imgIcon = ((ImageView)
 			// view.findViewById(R.id.imagemview));
             // TODO: review layout
 			txtView = (TextView) convertView.findViewById(R.id.action_settings);
@@ -67,8 +69,8 @@ public class AdapterListView extends BaseAdapter {
 		}
 
 		Item itm = (Item) Items.get(position);
-		txtView.setText(itm.title);
-		
+		//txtView.setText(itm.title);
+        listViewItem.getTvDescricao().setText(itm.getDescription());
 		return convertView;
 	}
 }

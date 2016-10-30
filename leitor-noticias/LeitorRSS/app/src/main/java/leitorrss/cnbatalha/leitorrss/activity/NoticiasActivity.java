@@ -2,6 +2,7 @@ package leitorrss.cnbatalha.leitorrss.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -60,11 +61,14 @@ public class NoticiasActivity extends Activity {
                 Item ctg = (Item) rssNoticia.channel.items.get(arg2);
                 //        .getItemAtPosition(arg2);
 
-                Intent iNoticias = new Intent( NoticiasActivity.this, NoticiaActivity.class );
-                iNoticias.putExtra(Consts.TITULO, ctg.getTitle()  );
-                iNoticias.putExtra(Consts.CONTENT, ctg.getDescription());
+                //Intent iNoticias = new Intent( NoticiasActivity.this, NoticiaActivity.class );
+                //iNoticias.putExtra(Consts.TITULO, ctg.getTitle()  );
+                //iNoticias.putExtra(Consts.CONTENT, ctg.getDescription());
 
-                startActivity(iNoticias);
+                //startActivity(iNoticias);
+
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(ctg.getLink()));
+                startActivity(browserIntent);
             }
         });
 
