@@ -28,9 +28,9 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, RssNoticia> {
 	
 	private ProgressDialog progressDlg;
 	private Context context;
-    private ArrayAdapter<Item> listNoticias;
+    private AdapterListView listNoticias;
 
-    public HttpGetAsyncTask(ArrayAdapter<Item> lista)
+    public HttpGetAsyncTask(AdapterListView lista)
     {
         super();
         this.listNoticias = lista;
@@ -125,7 +125,7 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, RssNoticia> {
 	protected void onPostExecute(RssNoticia result) {
 
         for (Item i : result.channel.items) {
-            this.listNoticias.add(i);
+            this.listNoticias. add(i);
 
         }
 

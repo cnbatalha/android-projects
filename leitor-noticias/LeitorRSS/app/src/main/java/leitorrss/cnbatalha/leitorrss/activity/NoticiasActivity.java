@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import leitorrss.cnbatalha.leitorrss.R;
+import leitorrss.cnbatalha.leitorrss.adapter.AdapterListView;
 import leitorrss.cnbatalha.leitorrss.model.Categoria;
 import leitorrss.cnbatalha.leitorrss.model.Consts;
 import leitorrss.cnbatalha.leitorrss.model.Item;
@@ -46,8 +47,9 @@ public class NoticiasActivity extends Activity {
         rssNoticia.channel.setTitle(noticiaTitle);
 
         // link com Adapter
-        ArrayAdapter<Item> adapter = new ArrayAdapter<Item>(this,
-                android.R.layout.simple_list_item_1, rssNoticia.channel.getItems());
+        AdapterListView adapter = new AdapterListView(this, rssNoticia.channel.getItems());
+                //ArrayAdapter<Item>(this,
+                //android.R.layout.simple_list_item_1, rssNoticia.channel.getItems());
         this.lvNoticias.setAdapter(adapter);
 
 
