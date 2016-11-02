@@ -126,9 +126,9 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, RssNoticia> {
 
         for (Item i : result.channel.items) {
             this.listNoticias. add(i);
-
         }
 
+		listNoticias.notifyDataSetChanged();
 		// Todo: Atualizar lista
 		//AdapterListView adp = new AdapterListView( NoticiasActivity.noticiaActivityContext, result.channel.items);
 		//NoticiasActivity.lvNoticias.setAdapter(adp);

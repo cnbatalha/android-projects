@@ -17,7 +17,35 @@ public class AdapterListView extends BaseAdapter {
 
 	private List<Item> Items;
 	private LayoutInflater mInflater;
-	private ListViewItem listViewItem;
+	private HoldListViewItem listViewItem;
+
+    public static class HoldListViewItem {
+
+        private TextView tvDescricao;
+        private TextView tvData;
+
+        public TextView getTvData() {
+            return tvData;
+        }
+
+        public void setTvData(TextView tvData) {
+            this.tvData = tvData;
+        }
+
+        public TextView getTvDescricao() {
+            return tvDescricao;
+        }
+
+        public void setTvDescricao(TextView tvDescricao) {
+            this.tvDescricao = tvDescricao;
+        }
+    }
+
+
+    public void add(Item item)
+	{
+		Items.add(item);
+	}
 
 	public AdapterListView(Context context, List<Item> items) {
 		super();
@@ -51,11 +79,13 @@ public class AdapterListView extends BaseAdapter {
 
 		// se a view estiver nula (nunca criada), inflamos o layout nela.
 		if (convertView == null) {
-			// infla o layout para podermos pegar as views
+
+            // infla o layout para podermos pegar as views
 			convertView = mInflater.inflate(R.layout.list_news, null);
+
 			// cria um item de suporte para n�o precisarmos sempre
 			// inflar as mesmas informacoes
-			listViewItem = new ListViewItem();
+			listViewItem = new HoldListViewItem();
 			listViewItem.setTvDescricao( ((TextView) convertView.findViewById(R.id.tvDescricao)) );
 			listViewItem.setTvData( ((TextView) convertView.findViewById(R.id.tvData)) );
 			// listViewItem.imgIcon = ((ImageView)
@@ -63,14 +93,16 @@ public class AdapterListView extends BaseAdapter {
             // TODO: review layout
 			txtView = (TextView) convertView.findViewById(R.id.action_settings);
 			// define os itens na view;
-			convertView.setTag(txtView);
+			convertView.setTag(listViewItem);
 		} else { // se a view j� existe pega os itens.
-			txtView = (TextView) convertView.getTag();
+            listViewItem = (HoldListViewItem) convertView.getTag();
 		}
 
 		Item itm = (Item) Items.get(position);
-		//txtView.setText(itm.title);
-        listViewItem.getTvDescricao().setText(itm.getDescription());
+		// txtView.setText(itm.title);
+
+        listViewItem.getTvDescricao().setText(itm.getTitle());
+        listViewItem.getTvData().setText(itm.getPubDate());
 		return convertView;
 	}
 }

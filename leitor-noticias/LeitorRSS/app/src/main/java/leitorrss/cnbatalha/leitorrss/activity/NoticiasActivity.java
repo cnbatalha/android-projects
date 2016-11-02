@@ -47,11 +47,10 @@ public class NoticiasActivity extends Activity {
         rssNoticia.channel.setTitle(noticiaTitle);
 
         // link com Adapter
-        AdapterListView adapter = new AdapterListView(this, rssNoticia.channel.getItems());
+        AdapterListView adapter = new AdapterListView(this,   rssNoticia.channel.getItems());
                 //ArrayAdapter<Item>(this,
                 //android.R.layout.simple_list_item_1, rssNoticia.channel.getItems());
         this.lvNoticias.setAdapter(adapter);
-
 
         // Comando click da Categoria selecionada
         this.lvNoticias.setOnItemClickListener(new AdapterView.OnItemClickListener() {
