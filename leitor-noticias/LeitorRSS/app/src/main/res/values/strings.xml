@@ -7,5 +7,6 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_noticias">Noticias</string>
     <string name="title_activity_noticia">Notícia</string>
+    <string name="title_activity_add_rss">Add</string>
 
 </resources>
